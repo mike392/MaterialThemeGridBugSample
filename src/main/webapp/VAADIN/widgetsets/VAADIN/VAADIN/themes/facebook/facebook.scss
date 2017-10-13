@@ -1,0 +1,28 @@
+$v-background-color: #777;
+
+@import "../material/material.scss";
+
+@mixin facebook {
+  @include material;
+
+  /* An actual theme rule */
+  .v-app {
+    background-color: red;
+  }
+
+  .v-button {
+    color: cyan;
+    background: yellow;
+  }
+
+  .v-label-colored {
+    color: cyan;
+    background: yellow;
+  }
+
+  .special {
+    color: cyan;
+    background: blue;
+    align-content: center;
+  }
+}

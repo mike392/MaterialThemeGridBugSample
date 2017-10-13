@@ -1,0 +1,8 @@
+@import "variables";
+@import "../valo/valo";
+@import "mytheme";
+
+.tests-valo-facebook {
+   @include valo;
+   @include mytheme;
+}
