@@ -109,6 +109,7 @@ public class MainView extends CustomComponent implements View {
         FormLayout lt = new FormLayout();
         lt.addComponents(clearFilterButton, grid);
         PopupView popupView = new PopupView("Cokoko", lt);
+        popupView.setHideOnMouseOut(false);
         showPopup.setCaption("Show popup");
         showPopup.addClickListener(new Button.ClickListener() {
             @Override
