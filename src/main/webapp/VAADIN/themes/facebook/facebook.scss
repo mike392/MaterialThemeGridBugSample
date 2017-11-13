@@ -18,11 +18,7 @@
   .customcell {
     width: auto;
   }
-  .tablestyle {
-    @extend viewstyle;
-    width: 100vw;
-    height: 33vh;
-  }
+
   .buttonstyle {
     width: 10vw;
     height: 5vh;

@@ -14509,7 +14509,7 @@ body:not(.v-touch) .card-hoverable:hover, body.v-touch .card-hoverable:active {
 	background-image: radial-gradient( circle, white 20%, transparent 10%);
 }
 
-.facebook .v-button:not(.no-border-radius):not(.floating-action):not(.round):after, .facebook .v-upload:not(.no-border-radius):not(.floating-action-upload):not(.round):after {
+.facebook :not(.v-component-group) .v-button:not(.no-border-radius):not(.floating-action):not(.round):after, .facebook .v-upload:not(.no-border-radius):not(.floating-action-upload):not(.round):after {
 	border-radius: 2px;
 }
 
@@ -15393,7 +15393,10 @@ body:not(.v-touch) .card-hoverable:hover, body.v-touch .card-hoverable:active {
 
 .facebook .v-grid-row:not(:first-child) {
 	border-top: 1px solid #d9d9d9;
-	padding-right: 20px;
+}
+
+.facebook .v-grid-row:not(:first-child) .v-grid-cell:last-child {
+	padding-right: 40px;
 }
 
 .facebook .v-grid-row-selected > .v-grid-cell {
@@ -16285,11 +16288,6 @@ body:not(.v-touch) .card-hoverable:hover, body.v-touch .card-hoverable:active {
 
 .facebook .customcell {
 	width: auto;
-}
-
-.facebook .tablestyle {
-	width: 100vw;
-	height: 33vh;
 }
 
 .facebook .buttonstyle {

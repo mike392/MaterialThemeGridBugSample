@@ -78,6 +78,8 @@ public class MainView extends CustomComponent implements View {
     private ComboBox<String> otherAlphaSelector;
     @Autowired
     private Button clearFilterButton;
+    @Autowired
+    private Button showPopup;
 
 
     //utils
@@ -101,11 +103,29 @@ public class MainView extends CustomComponent implements View {
         middleLabelsGroup.addComponents(labelBuilder.buildLabel(""),labelBuilder.buildLabel("Left","80%"), labelBuilder.buildLabel("Right","80%"));
         middleSelectionGroup.addComponents(middleLabelsGroup, middleAlphaSelectionGroup, middleNumericSelectionGroup);
         topSelectionGroup.addComponents(labelBuilder.buildLabel("Top"), topSelector);
-        buttonGroup.addComponents(clearFilterButton);
-        filterGroup.addComponents(topSelectionGroup, middleSelectionGroup, buttonGroup);
-        definitionGroup.addComponents(filterGroup, map);
-        tableDisplayGroup.addComponent(grid);
-        layout.addComponents(definitionGroup, tableDisplayGroup);
+        buttonGroup.addComponents(showPopup);
+        filterGroup.addComponents(topSelectionGroup, middleSelectionGroup,buttonGroup);
+        definitionGroup.addComponents(filterGroup,  map);
+        FormLayout lt = new FormLayout();
+        lt.addComponents(clearFilterButton, grid);
+        PopupView popupView = new PopupView("Cokoko", lt);
+        showPopup.setCaption("Show popup");
+        showPopup.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                layout.addComponent(popupView);
+                popupView.addPopupVisibilityListener(new PopupView.PopupVisibilityListener() {
+                    @Override
+                    public void popupVisibilityChange(PopupView.PopupVisibilityEvent popupVisibilityEvent) {
+                        if (!popupVisibilityEvent.isPopupVisible()){
+                            layout.removeComponent(popupView);
+                        }
+                    }
+                });
+                popupView.setPopupVisible(true);
+            }
+        });
+        layout.addComponents(definitionGroup);
         setCompositionRoot(layout);
 
         //shift uplink downlink labels to right
@@ -154,6 +174,46 @@ public class MainView extends CustomComponent implements View {
             setSomeotherlongtext("aafffaaaaaaaaaaaaaaaaaa");
             setSometext("aaaafffaaaaaaaaaaaaaaaa");
             setSomeOtherText("aaffaaaaaaaaaaaaaaaaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaaaaaaaaaaaaaaaaaaa");
+            setSomeotherlongtext("aaaaaaaaaaaaaaaaaaaa");
+            setSometext("aaaaaaaaaaaaaaaaaaaa");
+            setSomeOtherText("aaaaaaaaaaaaaaaaaaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaaaaaaaafffaaaaaaaaaaa");
+            setSomeotherlongtext("aaaaaafffaaaaaaaaaaaaaa");
+            setSometext("aaaaaaaaaaaaaafffaaaaaa");
+            setSomeOtherText("aaaaaaaaafffaaaaaaaaaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaaaaaaaaaaaaaaafffaaaa");
+            setSomeotherlongtext("aaaaaaaaaaaaafffaaaaaaa");
+            setSometext("aaaaaaaaaaaaaaaaafffaaa");
+            setSomeOtherText("aaaaaaaaaaaaaaaaafffaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaafffaaaaaaaaaaaaaaaaa");
+            setSomeotherlongtext("aafffaaaaaaaaaaaaaaaaaa");
+            setSometext("aaaafffaaaaaaaaaaaaaaaa");
+            setSomeOtherText("aaffaaaaaaaaaaaaaaaaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaaaaaaaaaaaaaaaaaaa");
+            setSomeotherlongtext("aaaaaaaaaaaaaaaaaaaa");
+            setSometext("aaaaaaaaaaaaaaaaaaaa");
+            setSomeOtherText("aaaaaaaaaaaaaaaaaaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaaaaaaaafffaaaaaaaaaaa");
+            setSomeotherlongtext("aaaaaafffaaaaaaaaaaaaaa");
+            setSometext("aaaaaaaaaaaaaafffaaaaaa");
+            setSomeOtherText("aaaaaaaaafffaaaaaaaaaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaaaaaaaaaaaaaaafffaaaa");
+            setSomeotherlongtext("aaaaaaaaaaaaafffaaaaaaa");
+            setSometext("aaaaaaaaaaaaaaaaafffaaa");
+            setSomeOtherText("aaaaaaaaaaaaaaaaafffaaa");}});
+        list.add(new DisplayObject(){{
+            setSomecaption("aaafffaaaaaaaaaaaaaaaaa");
+            setSomeotherlongtext("aafffaaaaaaaaaaaaaaaaaa");
+            setSometext("aaaafffaaaaaaaaaaaaaaaa");
+            setSomeOtherText("aaffaaaaaaaaaaaaaaaaaa");}});
         grid.setItems(list);
         grid.getDataProvider().refreshAll();
     }
@@ -174,18 +234,7 @@ public class MainView extends CustomComponent implements View {
     private void initButtons() {
         clearFilterButton.setCaption("Clear Filters");
         clearFilterButton.addClickListener((Button.ClickListener) clickEvent -> {
-            List<GoogleMapMarker> list = new LinkedList<>(map.getMarkers());
-            list.stream().forEach(e -> map.removeMarker(e));
-            topSelector = mainViewUtils.clearSelector(topSelector);
-            alphaSelector = mainViewUtils.clearSelector(alphaSelector);
-            numericSelector = mainViewUtils.clearSelector(numericSelector);
-            otherAlphaSelector = mainViewUtils.clearSelector(otherAlphaSelector);
-            otherNumericSelector = mainViewUtils.clearSelector(otherNumericSelector);
-            topSelector.setItems(Arrays.asList("Item1","Item 2", "Item 3"));
-            alphaSelector.setItems(Arrays.asList("Item1","Item 2", "Item 3"));
-            otherAlphaSelector.setItems(Arrays.asList("Item1","Item 2", "Item 3"));
-            numericSelector.setItems(Arrays.asList(1,2,3));
-            otherNumericSelector.setItems(Arrays.asList(1,2,3));
+           gridInit();
         });
     }
 

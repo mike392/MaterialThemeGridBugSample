@@ -71,7 +71,6 @@ public class MainViewConfig {
         grid.addColumn(DisplayObject::getSomeOtherText).setCaption("Some Other Text");
         grid.addColumn(DisplayObject::getSomeotherlongtext).setCaption("Some Other Long text");
         grid.setStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
-        grid.addStyleName("tablestyle");
         return grid;
     }
 
