@@ -10,6 +10,7 @@ import com.vaadin.server.*;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.Window;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletException;
@@ -26,6 +27,8 @@ public class GeoUI extends UI {
 
     @Autowired
     private SpringViewProvider springViewProvider;
+    @Autowired
+    private Window popup;
 
     public GeoUI() {
 
@@ -37,6 +40,7 @@ public class GeoUI extends UI {
         navigator.addProvider(springViewProvider);
         navigator.addView("main", new MainView());
         navigator.navigateTo("main");
+        addWindow(popup);
 
     }
 

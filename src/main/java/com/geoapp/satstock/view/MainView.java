@@ -80,6 +80,8 @@ public class MainView extends CustomComponent implements View {
     private Button clearFilterButton;
     @Autowired
     private Button showPopup;
+    @Autowired
+    private Window popupView;
 
 
     //utils
@@ -108,22 +110,15 @@ public class MainView extends CustomComponent implements View {
         definitionGroup.addComponents(filterGroup,  map);
         FormLayout lt = new FormLayout();
         lt.addComponents(clearFilterButton, grid);
-        PopupView popupView = new PopupView("Cokoko", lt);
-        popupView.setHideOnMouseOut(false);
+        popupView.setContent(lt);
+        popupView.center();
+        popupView.setVisible(false);
         showPopup.setCaption("Show popup");
         showPopup.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                layout.addComponent(popupView);
-                popupView.addPopupVisibilityListener(new PopupView.PopupVisibilityListener() {
-                    @Override
-                    public void popupVisibilityChange(PopupView.PopupVisibilityEvent popupVisibilityEvent) {
-                        if (!popupVisibilityEvent.isPopupVisible()){
-                            layout.removeComponent(popupView);
-                        }
-                    }
-                });
-                popupView.setPopupVisible(true);
+                popupView.setClosable(true);
+                popupView.setVisible(true);
             }
         });
         layout.addComponents(definitionGroup);

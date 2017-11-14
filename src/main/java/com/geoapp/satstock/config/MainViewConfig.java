@@ -74,6 +74,11 @@ public class MainViewConfig {
         return grid;
     }
 
+    @Bean
+    public Window getWindow(){
+        return new Window("Some window");
+    }
+
 
     //ui components (controls)
     @Bean
